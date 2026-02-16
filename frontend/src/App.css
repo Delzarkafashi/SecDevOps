@@ -1,0 +1,206 @@
+.page
+{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 12px;
+}
+
+.container
+{
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.panel
+{
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+}
+
+.headerRow
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hTitle
+{
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.badge
+{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  font-size: 12px;
+}
+
+.stack
+{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle
+{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.form
+{
+  display: grid;
+  gap: 10px;
+}
+
+.label
+{
+  font-size: 13px;
+  color: #374151;
+}
+
+.input
+{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  outline: none;
+}
+
+.input:focus
+{
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.textarea
+{
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  outline: none;
+  resize: vertical;
+}
+
+.textarea:focus
+{
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.row
+{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn
+{
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn:disabled
+{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnPrimary
+{
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.btnPrimary:hover
+{
+  background: #4338ca;
+}
+
+.btnSecondary
+{
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.btnSecondary:hover
+{
+  background: #f9fafb;
+}
+
+.btnDanger
+{
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.btnDanger:hover
+{
+  background: #dc2626;
+}
+
+.alert
+{
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+  font-size: 13px;
+}
+
+.card
+{
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.05);
+}
+
+.cardTitle
+{
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+.cardMeta
+{
+  margin-top: 10px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.muted
+{
+  color: #6b7280;
+  font-size: 12px;
+}
