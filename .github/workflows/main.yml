@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_DB: api_test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -26,8 +26,8 @@ jobs:
           --health-retries=5
 
     env:
-      ConnectionStrings__Default: Host=localhost;Port=5432;Database=api_test;Username=postgres;Password=postgres
-      Jwt__Key: TEST_JWT_KEY_32_CHARS_MINIMUM_123456
+      ConnectionStrings__Default: Host=localhost;Port=5432;Database=api_test;Username=postgres;Password=${{ secrets.DB_PASSWORD }}
+      Jwt__Key: ${{ secrets.JWT_KEY }}
 
     steps:
       - uses: actions/checkout@v4
