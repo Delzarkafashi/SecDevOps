@@ -53,6 +53,19 @@ jobs:
             -v ON_ERROR_STOP=1 \
             -f Backend/Database/schema.sql
 
+      - name: Seed test users
+        run: |
+          PGPASSWORD="${{ secrets.DB_PASSWORD }}" psql \
+            -h localhost \
+            -U postgres \
+            -d api_test \
+            -v ON_ERROR_STOP=1 \
+            -c "INSERT INTO users (email, password_hash, role) VALUES
+              ('viewer@demo.local', crypt('Viewer123!', gen_salt('bf')), 'viewer'),
+              ('staff@demo.local',  crypt('Staff123!',  gen_salt('bf')), 'staff'),
+              ('admin@demo.local',  crypt('Admin123!',  gen_salt('bf')), 'admin')
+              ON CONFLICT (email) DO NOTHING;"
+
       - name: Restore
         run: dotnet restore Backend/Backend.sln
 
