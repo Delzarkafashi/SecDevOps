@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      ASPNETCORE_ENVIRONMENT: Testing
       ConnectionStrings__Default: Host=localhost;Port=5432;Database=api_test;Username=postgres;Password=${{ secrets.DB_PASSWORD }}
       Jwt__Key: ${{ secrets.JWT_KEY }}
 
@@ -38,12 +39,12 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: Install PostgreSQL client (psql)
+      - name: Install PostgreSQL client
         run: |
           sudo apt-get update
           sudo apt-get install -y postgresql-client
 
-      - name: Apply database schema
+      - name: Apply database schema (with seed users)
         run: |
           PGPASSWORD="${{ secrets.DB_PASSWORD }}" psql \
             -h localhost \
