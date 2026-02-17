@@ -31,13 +31,22 @@ jobs:
           --health-retries=5
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
+
+      # 🔥 Installera psql
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
+
+      # 🔥 Kör ditt schema i CI
+      - name: Init database schema
+        run: |
+          PGPASSWORD=${{ secrets.DB_PASSWORD }} psql \
+          -h localhost -U postgres -d api_test \
+          -f Backend/Database/schema.sql
 
       - name: Restore
         run: dotnet restore Backend/Backend.sln
