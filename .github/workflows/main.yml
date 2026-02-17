@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    environment: dev
 
     env:
       ConnectionStrings__Default: Host=localhost;Port=5432;Database=api_test;Username=postgres;Password=${{ secrets.DB_PASSWORD }}
@@ -28,25 +27,30 @@ jobs:
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=5
+          --health-retries=10
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
 
-      # 🔥 Installera psql
-      - name: Install PostgreSQL client
-        run: sudo apt-get install -y postgresql-client
-
-      # 🔥 Kör ditt schema i CI
-      - name: Init database schema
+      - name: Install PostgreSQL client (psql)
         run: |
-          PGPASSWORD=${{ secrets.DB_PASSWORD }} psql \
-          -h localhost -U postgres -d api_test \
-          -f Backend/Database/schema.sql
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Apply database schema
+        run: |
+          PGPASSWORD="${{ secrets.DB_PASSWORD }}" psql \
+            -h localhost \
+            -U postgres \
+            -d api_test \
+            -v ON_ERROR_STOP=1 \
+            -f Backend/Database/schema.sql
 
       - name: Restore
         run: dotnet restore Backend/Backend.sln
