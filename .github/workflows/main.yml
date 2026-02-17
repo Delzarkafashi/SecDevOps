@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-   branches: ["main"]
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
@@ -10,6 +10,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     environment: dev
+
+    env:
+      ConnectionStrings__Default: Host=localhost;Port=5432;Database=api_test;Username=postgres;Password=${{ secrets.DB_PASSWORD }}
+      Jwt__Key: ${{ secrets.JWT_KEY }}
 
     services:
       postgres:
@@ -26,12 +30,9 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
-    env:
-      ConnectionStrings__Default: Host=localhost;Port=5432;Database=api_test;Username=postgres;Password=${{ secrets.DB_PASSWORD }}
-      Jwt__Key: ${{ secrets.JWT_KEY }}
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -45,4 +46,4 @@ jobs:
         run: dotnet build Backend/Backend.sln --no-restore
 
       - name: Test
-        run: dotnet test Backend/Backend.sln --no-build
+        run: dotnet test Backend/Backend.sln --no-build --verbosity normal
