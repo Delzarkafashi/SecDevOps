@@ -47,6 +47,7 @@ Rollerna används för att visa autentisering och auktorisering i praktiken.
 - Vanliga angreppsvägar
 - Varför frontend aldrig är säker
 - Backend som enda beslutsfattare
+- Gå genom olika säkerhethots som finns
 
 ### Resultat
 Deltagaren förstår *varför* säkerhet måste byggas in i varje lager.
